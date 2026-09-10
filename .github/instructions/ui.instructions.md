@@ -1,10 +1,30 @@
 ---
 description: 'Central UI strategy and component development philosophy'
+applyTo: '**/*.{astro,css}'
 ---
 
 # UI Component Strategy
 
 This file defines the central UI development strategy for Tailspin Toys. Technology-specific guidance is in separate instruction files.
+
+## Documentation and comments
+
+- Comment **why**: explain intent, constraints, trade-offs, or non-obvious decisions.
+- Do not comment **what** the code already makes clear; avoid paraphrasing the next line.
+- Keep comments current. When changing the related code, update or remove comments that no longer describe the implementation.
+- Prefer a clear name and simple structure over a comment that explains straightforward mechanics.
+
+## TypeScript formatting
+
+For TypeScript and Astro frontmatter, use single-quoted strings, semicolons, trailing commas in multiline collections and calls, and spaces inside object braces. ESLint enforces these rules for `.ts` and `.astro` files.
+
+## Related instruction files
+
+- [`astro.instructions.md`](./astro.instructions.md) — page/component patterns for Astro, data fetching, and layout structure
+- [`style.instructions.md`](./style.instructions.md) — Tailwind v4 styling, dark theme, and utility conventions
+- [`playwright.instructions.md`](./playwright.instructions.md) — accessible, resilient browser-test authoring
+- [`unit-tests.instructions.md`](./unit-tests.instructions.md) — Vitest + Drizzle data-layer test guidance
+- [`drizzle.instructions.md`](./drizzle.instructions.md) — database schema and helper patterns
 
 ## Component Architecture
 
@@ -50,6 +70,7 @@ Refer to technology-specific instruction files:
 - Keep components focused on a single responsibility
 - Use props for configuration, not duplication
 - Document component APIs with TypeScript types
+- Every reusable `.astro` component must document its `Props` interface, including what each prop controls and any meaningful constraints or defaults
 
 ## Development Workflow
 
