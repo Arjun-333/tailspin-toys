@@ -30,12 +30,16 @@ test.describe('Game Listing and Navigation', () => {
     const initialCount = await cards.count();
     const categoryFilter = page.getByTestId('category-filter-1');
     const publisherFilter = page.getByTestId('publisher-filter');
+    const clearFilters = page.getByTestId('clear-filters');
+
+    await expect(clearFilters).toBeHidden();
 
     await test.step('Filter by category', async () => {
       await categoryFilter.check();
       await expect(cards).toHaveCount(4);
       await expect(page.getByTestId('filter-result-count')).toHaveText('Showing 4 games');
       await expect(page).toHaveURL(/category=1/);
+      await expect(clearFilters).toBeVisible();
     });
 
     await test.step('Narrow the category results by publisher', async () => {
@@ -46,9 +50,10 @@ test.describe('Game Listing and Navigation', () => {
     });
 
     await test.step('Clear all filters', async () => {
-      await page.getByTestId('clear-filters').click();
+      await clearFilters.click();
       await expect(cards).toHaveCount(initialCount);
       await expect(page).toHaveURL('/');
+      await expect(clearFilters).toBeHidden();
     });
   });
 
