@@ -19,7 +19,9 @@ import GameCard from '../components/GameCard.astro';
 import { getDatabase } from '../lib/db';
 import { getAllGames } from '../lib/games';
 
+/** Public configuration accepted by this reusable page component. */
 interface Props {
+  /** Text displayed as the page heading. */
   title: string;
 }
 
@@ -32,6 +34,8 @@ const games = await getAllGames(getDatabase());
 </Layout>
 ```
 
+Reusable `.astro` components must document their `Props` interface. Add a short TSDoc/JSDoc comment to every prop that explains its meaning, expected shape, or relevant default/constraint. Keep the interface next to the frontmatter that consumes `Astro.props` so the component contract is easy to discover.
+
 ## Layouts
 
 - Create reusable layout components in `src/layouts/`
@@ -43,7 +47,9 @@ const games = await getAllGames(getDatabase());
 
 ```astro
 ---
+/** Public configuration accepted by this reusable layout component. */
 interface Props {
+  /** Text used in the document title and page heading. */
   title: string;
 }
 const { title } = Astro.props;
@@ -109,7 +115,7 @@ There is no Svelte/React layer. When a page genuinely needs client behaviour, ad
 ## TypeScript
 
 - Use TypeScript for type-safe props
-- Define `Props` interface in frontmatter
+- Define a `Props` interface in frontmatter and document the interface's purpose and each prop for reusable components
 - Type component imports and helper return values
 - Run `npx astro sync` to (re)generate route/content types before linting or type-checking
 - `.astro` files are type-checked by `npm run typecheck:astro` (which runs `astro sync` then `astro check`), on the classic `typescript` package. The pure TypeScript in `db/`, `src/lib/`, and `src/types/` is type-checked separately by `npm run typecheck` (the native TS 7 compiler, `tsgo`), which does **not** process `.astro` files.
@@ -120,3 +126,4 @@ There is no Svelte/React layer. When a page genuinely needs client behaviour, ad
 - Minimize client-side JavaScript — the default is zero JS shipped
 - Import and use global CSS styles from layouts
 - Always include a `data-testid` on interactive elements (see `ui.instructions.md`)
+- Comment intent and decisions, not obvious markup or mechanics; update or remove stale comments when changing a component

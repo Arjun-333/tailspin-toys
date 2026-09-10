@@ -14,6 +14,19 @@ This is a crowdfunding platform for games with a developer theme. The applicatio
 
 ## Code standards
 
+### Comments and documentation
+
+- Comment **why**, not **what**: explain intent, constraints, trade-offs, and non-obvious decisions; do not restate code.
+- Keep comments current. Update or remove comments in the same change when the related implementation changes.
+- Every exported function in `db/` and `src/lib/` must have TSDoc/JSDoc describing its purpose, parameters, and return value, including the injectable `db` parameter used by data-access helpers.
+- Every reusable `.astro` component must document its `Props` interface and the meaning or constraints of its props.
+- Follow the detailed conventions in [`.github/instructions/`](instructions/).
+
+### TypeScript formatting
+
+- Use single quotes for strings, semicolons for statements, trailing commas in multiline collections/calls, and spaces inside object braces.
+- These conventions are enforced for `.ts` and `.astro` files by the matching ESLint rules in `eslint.config.js`; run `npm run lint` before committing.
+
 ### Required Before Each Commit
 
 #### Testing guidelines
@@ -83,6 +96,17 @@ This is a crowdfunding platform for games with a developer theme. The applicatio
 
 > [!NOTE]
 > TypeScript 7 (`tsgo`) is adopted **side-by-side** for type checking only; it does not affect linting. ESLint + `typescript-eslint` and `astro check` still resolve the classic `typescript` package (kept at v6) because the native compiler's API isn't ready for them yet. Do **not** bump the classic `typescript` package to 7 (a Dependabot `ignore` holds it) until `typescript-eslint` + `@astrojs/check` support the native API. `tsgo` is `--noEmit` only; the site is still built by `astro build`.
+
+## Instruction files
+
+Follow the project guidance in `.github/instructions/` before making code or test changes:
+
+- `astro.instructions.md` — Astro pages, layouts, and static data-fetching patterns
+- `drizzle.instructions.md` — Drizzle schema, migrations, and SQLite helper conventions
+- `playwright.instructions.md` — Playwright E2E authoring rules and test quality expectations
+- `style.instructions.md` — Tailwind v4 styling and dark-theme utilities
+- `ui.instructions.md` — shared UI strategy, accessibility, and focus/test-id requirements
+- `unit-tests.instructions.md` — Vitest coverage and in-memory DB testing patterns
 
 ## Repository Structure
 

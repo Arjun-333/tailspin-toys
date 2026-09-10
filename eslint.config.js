@@ -40,4 +40,15 @@ export default [
       parser: tseslint.parser,
     },
   },
+
+  // Keep TypeScript and Astro source formatting consistent without a formatter dependency.
+  {
+    files: ["**/*.ts", "**/*.astro"],
+    rules: {
+      quotes: ["error", "single", { avoidEscape: true }],
+      semi: ["error", "always"],
+      "comma-dangle": ["error", "always-multiline"],
+      "object-curly-spacing": ["error", "always"],
+    },
+  },
 ];
