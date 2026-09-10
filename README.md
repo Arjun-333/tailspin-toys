@@ -35,6 +35,12 @@ npm run dev
 
 `predev` migrates and seeds the local database first. Then navigate to the [website](http://localhost:4321) to see the site!
 
+The homepage supports filtering games by one or more categories and by
+publisher. Filters are applied in the browser to the statically generated
+catalog, and selections are stored in the URL (`category=<id>` can be repeated
+for multiple categories and `publisher=<id>` selects a publisher) so filtered
+views can be bookmarked or shared.
+
 To preview a production build instead:
 
 ```bash
