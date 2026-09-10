@@ -72,9 +72,10 @@ const publishers = [...new Map(
         <button
           type="button"
           data-testid="clear-filters"
+          hidden
           class="w-fit rounded-lg border border-slate-600 px-4 py-2 text-sm font-medium text-slate-200 transition-colors hover:bg-slate-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
         >
-          Clear filters
+          Clear all filters
         </button>
       </div>
 
@@ -128,6 +129,7 @@ const publishers = [...new Map(
         categoryInputs.filter((input) => input.checked).map((input) => input.value),
       );
       const selectedPublisher = publisherInput?.value ?? '';
+      clearButton.hidden = selectedCategories.size === 0 && selectedPublisher === '';
       let visibleCount = 0;
 
       cards.forEach((card) => {
